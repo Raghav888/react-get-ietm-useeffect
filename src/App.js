@@ -6,7 +6,7 @@ export default function App() {
   let [status, setstatus] = useState(false);
   let [data, setdata] = useState([]);
   useEffect(() => {
-    const asyncfunc = async () => {
+    (async () => {
       try {
         setstatus(true);
         const recevieddata = await axios.get("/api/products");
@@ -16,8 +16,7 @@ export default function App() {
         console.log(error);
         setstatus(false);
       }
-    };
-    asyncfunc();
+    })();
     // write product loading code here..
     // products are at `/api/products`
     //never use statesetter here
@@ -33,7 +32,7 @@ export default function App() {
       {status && <h2>Loading...</h2>}
       {data &&
         data.map((items) => (
-          <div class="mantra-card-holder ">
+          <div className="mantra-card-holder ">
             <div class="mantra-card-holder-image ">
               <img class="mantra-card-image " src={items.image} alt="im" />
             </div>
